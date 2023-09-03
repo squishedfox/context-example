@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { IUser } from "../hooks";
+import { IUser } from "../api";
 
 export interface IUserContext {
     user: IUser | null;

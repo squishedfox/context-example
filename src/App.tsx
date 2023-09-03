@@ -1,14 +1,16 @@
-import React, { Context } from 'react';
-import useGetUserHook, { IUser } from './hooks';
+import useGetUserHook from './hooks';
+import { UserContext } from './context';
+import UserProfile from './components';
 
 const App = () => {
   const {
     isInitialLoading,
+    isFetching,
     user,
     fetch,
   } = useGetUserHook();
 
-  if (isInitialLoading) {
+  if (isInitialLoading || isFetching) {
     return <p>Spinner...</p>;
   }
   
@@ -17,7 +19,10 @@ const App = () => {
   }
 
   return <UserContext.Provider value={{user: user, fetch: fetch }}>
-
+    <div>
+      <UserProfile />
+      <button onClick={() => fetch()}>Click to reload</button>
+    </div>
   </UserContext.Provider>
 };
 
